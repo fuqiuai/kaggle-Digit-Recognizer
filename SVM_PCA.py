@@ -38,10 +38,9 @@ if __name__ == '__main__':
     
     print('Saving...')
     # 将测试结果保存到csv
-    df = pd.DataFrame(test_predict)
-    df.index += 1
-    df.columns = ['Label']
-    df.to_csv('./data/SVM_PCA_results.csv', header=True)
+    df = pd.DataFrame(pd.Series(range(1, test_predict.shape[0]+1), name='ImageId'))
+    df['Label'] = test_predict
+    df.to_csv('./data/SVM_PCA_results.csv', index = False)
 
     time_2 = time.time()
     print('cost %f seconds' % (time_2 - time_1))
